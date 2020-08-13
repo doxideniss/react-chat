@@ -1,0 +1,52 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+
+  &__top {
+    margin-bottom: 50px;
+    h2 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    p {
+      font-size: 18px;
+      opacity: 0.5;
+    }
+  }
+
+  .button {
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__register-link {
+    font-size: 16px;
+    color: #adadad;
+  }
+
+  &__success-block {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+      font-size: 22px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 26px;
+      opacity: 0.5;
+    }
+  }
+
+  .block {
+    width: 430px;
+  }
+}
