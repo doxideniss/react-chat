@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Message, DialogItem } from 'components';
+import {Message, DialogItem} from 'components';
 
 import './home.scss';
 
@@ -13,7 +13,19 @@ const Home = () => {
   };
   return (
     <section className="home">
-      <DialogItem/>
+      <DialogItem user={{
+                    name: 'Alina',
+                    avatar: "https://sun1-22.userapi.com/c857228/v857228584/1b1a26/L2IpQTTJGss.jpg?ava=1",
+                    isOnline: true
+                  }}
+                  message={{
+                    text: 'Привет Привет Привет Привет Приветbrbrbs Привет Привет Привет Привет Привет Привет Привет ',
+                    isReaded: false,
+                    isMe: false,
+                    createdAt: new Date('2020-08-19 15:10:00'),
+                  }}
+                  unreaded={3000}
+      />
 
       {/*<Dialogs items={[
         {

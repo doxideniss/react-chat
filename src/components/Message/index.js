@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import {Time} from 'components';
+import {Time, CheckIcon} from 'components';
 
 import './message.scss';
-import readedSVG from 'assets/img/readed.svg';
-import noReadedSVG from 'assets/img/noreaded.svg';
 
 const Message = ({avatar, user, text, date, isMe, isReaded, isTyping, attachments}) => {
   return (
@@ -46,11 +44,7 @@ const Message = ({avatar, user, text, date, isMe, isReaded, isTyping, attachment
             ))
             }
           </div>
-          {isMe && (isReaded ? (
-            <img className="message__icon" src={readedSVG} alt="Readed icon"/>
-          ) : (
-            <img className="message__icon" src={noReadedSVG} alt="No readed icon"/>
-          ))}
+          <CheckIcon className="message__icon" isMe={isMe} isReaded={isReaded}/>
         </div>
         <Time date={date}/>
       </div>
