@@ -5,7 +5,19 @@ import {Button, Block} from 'components';
 import {Form, Input} from "antd";
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 
-const LoginForm = () => {
+import {validateFields} from "utils/helpers";
+
+const LoginForm = (props) => {
+  const {
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = props;
+
+  const validateField = validateFields(errors, touched);
+
   return (
     <>
       <div className="auth__top">
@@ -14,18 +26,32 @@ const LoginForm = () => {
       </div>
       <Block>
         <Form>
-          <Form.Item name="username">
+          <Form.Item hasFeedback
+                     validateStatus={validateField('email')}
+                     help={!touched.email ? null : errors.email}
+          >
             <Input
+              id="email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              size="large"
               prefix={<UserOutlined/>}
-              placeholder="Ваше имя"/>
+              placeholder="E-Mail"/>
           </Form.Item>
-          <Form.Item name="password">
+          <Form.Item hasFeedback
+                     validateStatus={validateField('password')}
+                     help={!touched.password ? null : errors.password}
+          >
             <Input.Password
+              id="password"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              size="large"
               prefix={<LockOutlined/>}
               placeholder="Пароль"/>
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" size="large">Войти</Button>
+            <Button onClick={handleSubmit} type="primary" size="large">Войти</Button>
           </Form.Item>
           <Link className="auth__register-link" to="/signup">Зарегистрироваться</Link>
         </Form>

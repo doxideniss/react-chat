@@ -1,10 +1,21 @@
 import React from 'react';
 
 import {Button, Block} from 'components';
-import {Form, Input} from "antd";
+import {Alert, Form, Input} from "antd";
 import {UserOutlined, MailOutlined, LockOutlined, InfoCircleTwoTone} from '@ant-design/icons';
+import {validateFields} from "utils/helpers";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+  const {
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isValid,
+  } = props;
+
+  const validateField = validateFields(errors, touched);
 
   const successReg = true;
 
@@ -16,33 +27,72 @@ const RegisterForm = () => {
       </div>
       <Block>
         { successReg ? (
-          <Form>
-            <Form.Item name="email">
+          <Form onSubmit={handleSubmit}>
+            <Form.Item hasFeedback
+                       validateStatus={validateField('email')}
+                       help={!touched.email ? null : errors.email}
+            >
               <Input
+                id="email"
+                size="large"
                 prefix={<MailOutlined/>}
                 placeholder="Введите E-Mail"
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Form.Item>
-            <Form.Item name="username">
+            <Form.Item hasFeedback
+                       validateStatus={validateField('username')}
+                       help={!touched.username ? null : errors.username}
+            >
               <Input
+                id="username"
+                size="large"
                 prefix={<UserOutlined/>}
                 placeholder="Ваше Имя"
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Form.Item>
-            <Form.Item name="password">
+            <Form.Item hasFeedback
+                       validateStatus={validateField('password')}
+                       help={!touched.password ? null : errors.password}
+            >
               <Input.Password
+                id="password"
+                size="large"
                 prefix={<LockOutlined/>}
                 placeholder="Пароль"
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Form.Item>
-            <Form.Item name="password">
+            <Form.Item hasFeedback
+                       validateStatus={validateField('password_2')}
+                       help={!touched.password_2 ? null : errors.password_2}
+            >
               <Input.Password
+                id="password_2"
+                size="large"
                 prefix={<LockOutlined/>}
                 placeholder="Повторите пароль"
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </Form.Item>
+            {
+              !isValid && (
+                <Form.Item>
+                <Alert
+                  description="Ошибка"
+                  type="error"
+                  showIcon
+                />
+                </Form.Item>
+              )
+            }
             <Form.Item>
-              <Button type="primary" htmlType="submit" size="large">Зарегистрироваться</Button>
+              <Button onClick={handleSubmit} type="primary" size="large">Зарегистрироваться</Button>
             </Form.Item>
           </Form>
         ) : (
