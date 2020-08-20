@@ -26,7 +26,7 @@ const DialogItem = ({user, message, unreaded}) => {
             {user.name}
           </div>
           <div className="dialogs__item-date">
-            <Time date={message.createdAt}/>
+            <Time date={message.created_at}/>
           </div>
         </div>
         <div className="dialogs__item-block">

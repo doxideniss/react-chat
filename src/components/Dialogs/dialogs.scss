@@ -1,0 +1,73 @@
+@import '~styles/variables';
+
+.dialogs {
+  &__item {
+    $item: &;
+    display: flex;
+    max-width: 280px;
+    margin-bottom: 20px;
+    &--online {
+      #{$item}-avatar::before,
+      #{$item}-avatar::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 14px;
+        height: 14px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+      #{$item}-avatar::after {
+        bottom: 3px;
+        right: 3px;
+        width: 8px;
+        height: 8px;
+        background-color: $online;
+      }
+    }
+  }
+  &__item-avatar {
+    font-size: 0;
+    margin-right: 11px;
+    position: relative;
+    img {
+      width: 41px;
+      height: 41px;
+      border-radius: 50%;
+    }
+  }
+  &__item-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16px;
+  }
+  &__item-block {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__item-name {
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  &__item-text {
+    width: 205px;
+    margin-top: 5px;
+    opacity: 0.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__item-count {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 11px;
+    min-width: 21px;
+    padding: 3px;
+    border-radius: 11px;
+    background: $message-count;
+  }
+}
