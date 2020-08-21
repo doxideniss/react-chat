@@ -1,24 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import {Time, CheckIcon} from 'components';
+import {Time, CheckIcon, Avatar} from 'components';
 
-import './dialogItem.scss';
+const DialogItem = ({user, isMe, created_at, text, isReaded, unreaded}) => {
 
-const DialogItem = ({user, message, unreaded}) => {
-  const getAvatar = avatar => {
-    if (avatar) {
-      return <img src={avatar} alt={`${user.name} avatar`}/>;
-    } else {
-
-    }
-  };
   return (
     <div className={classNames('dialogs__item', {
       'dialogs__item--online': user.isOnline,
     })}>
       <div className="dialogs__item-avatar">
-        { getAvatar(user.avatar) }
+        <Avatar user={user} />
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-block">
@@ -26,13 +18,13 @@ const DialogItem = ({user, message, unreaded}) => {
             {user.name}
           </div>
           <div className="dialogs__item-date">
-            <Time date={message.created_at}/>
+            <Time date={created_at}/>
           </div>
         </div>
         <div className="dialogs__item-block">
-          <div className="dialogs__item-text">{message.text}</div>
+          <div className="dialogs__item-text">{text}</div>
           <div className="dialogs__item-status">
-            <CheckIcon isMe={message.isMe} isReaded={message.isReaded}/>
+            <CheckIcon isMe={isMe} isReaded={isReaded}/>
             {
               unreaded > 0 && (
                 <div className="dialogs__item-count">{unreaded}</div>

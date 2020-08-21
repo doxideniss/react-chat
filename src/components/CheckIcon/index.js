@@ -6,11 +6,11 @@ import noReadedSVG from 'assets/img/noreaded.svg';
 
 const CheckIcon = ({isMe, className, isReaded}) => {
   return (
-    isMe && (
+    isMe ? (
       <img className={classNames(className)}
            src={isReaded ? readedSVG : noReadedSVG}
            alt="Readed icon"/>
-    )
+    ) : null
   );
 };
 

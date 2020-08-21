@@ -1,4 +1,5 @@
 import React from 'react';
+import orderBy from 'lodash/orderBy';
 
 import {DialogItem} from 'components';
 
@@ -9,12 +10,10 @@ const Dialogs = ({items, userId}) => {
   return (
     <div className="dialogs">
       {
-        items.map(item => (
+        orderBy(items, ["created_at"], ["desc"]).map(item => (
           <DialogItem key={item._id}
-                      user={item.lastMessage.user}
-                      message={item.lastMessage}
-                      unreaded={item.unreaded}
-                      isMe={item.message.user._id === userId}
+                      isMe={item.user._id === userId}
+                      {...item}
           />
         ))
       }
