@@ -1,7 +1,6 @@
 import tinycolor from 'tinycolor2';
 
 export default hash => {
-  console.log(hash)
   const [r, g, b] = hash
     .substring(0, 3)
     .split('');

@@ -6,6 +6,7 @@
     display: flex;
     max-width: 280px;
     margin-bottom: 20px;
+    cursor: pointer;
     &--online {
       #{$item}-avatar::before,
       #{$item}-avatar::after {
@@ -25,6 +26,10 @@
         height: 8px;
         background-color: $online;
       }
+    }
+    &--active,
+    &:hover {
+      background-color: $dialog-active;
     }
   }
   &__item-avatar {

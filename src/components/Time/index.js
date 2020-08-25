@@ -6,8 +6,7 @@ import {ru as ruLocale} from 'date-fns/locale';
 import './time.scss';
 
 const Time = ({date}) => {
-
-  const formatDateToNow = formatDistanceToNow(date, {addSuffix: true, locale: ruLocale});
+  const formatDateToNow = formatDistanceToNow(new Date(date), {addSuffix: true, locale: ruLocale});
   const formatDate = date && (formatDateToNow === 'меньше минуты назад' ? 'Сейчас' : formatDateToNow );
 
   return (

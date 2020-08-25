@@ -10,7 +10,7 @@ const Dialogs = ({items, userId}) => {
   return (
     <div className="dialogs">
       {
-        orderBy(items, ["created_at"], ["desc"]).map(item => (
+        orderBy(items, (item) => (new Date(item.created_at)),["desc"]).map(item => (
           <DialogItem key={item._id}
                       isMe={item.user._id === userId}
                       {...item}
