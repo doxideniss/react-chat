@@ -4,97 +4,13 @@
   padding: 0 150px;
   background-color: $bg;
   height: 100%;
+  &__container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.04204);
+    padding: 20px 0;
+  }
 }
 
-.chat {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.04204);
-
-  &__sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 320px;
-    padding: 20px;
-    border-right: 1px solid $border;
-  }
-
-  &__sidebar-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 45px;
-    width: 100%;
-
-    p {
-      opacity: 0.65;
-      margin-left: 7px;
-      margin-right: auto;
-    }
-
-  }
-
-  &__sidebar-search {
-    margin-bottom: 30px;
-
-    span,
-    span::before {
-      border: none;
-    }
-
-    input {
-      background-color: $bg-search;
-    }
-  }
-
-  &__sidebar-dialogs {
-    overflow-y: auto;
-  }
-
-  &__dialog {
-    width: 100%;
-    padding: 13px 35px 37px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__dialog-header {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    border-bottom: 1px solid $border;
-    padding-bottom: 12px;
-  }
-
-  &__dialog-name {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  &__dialog-online {
-    span {
-      opacity: 0.3;
-    }
-
-    &::before {
-      display: inline-block;
-      content: '';
-      width: 6px;
-      height: 6px;
-      background-color: $online;
-      border-radius: 50%;
-      margin-right: 5px;
-    }
-  }
-
-  &__dialog-options {
-    opacity: 0.5;
-    cursor: pointer;
-  }
-
-  &__dialog-messages {
-    overflow-y: auto;
-  }
-}

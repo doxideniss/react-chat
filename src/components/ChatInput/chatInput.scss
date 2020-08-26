@@ -1,0 +1,18 @@
+@import '~styles/variables';
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: 1px solid $message-input-border;
+  border-radius: 4px;
+  &__icon {
+    opacity: 0.5;
+    span {
+      font-size: 18px;
+    }
+  }
+  &__camera-btn {
+    margin-right: 13px;
+  }
+}

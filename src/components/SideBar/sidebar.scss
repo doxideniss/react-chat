@@ -1,0 +1,43 @@
+@import "~styles/variables";
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+  border-right: 1px solid $border;
+
+  &__header {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 45px;
+    width: 100%;
+
+    p {
+      opacity: 0.65;
+      margin-left: 7px;
+      margin-right: auto;
+    }
+
+  }
+
+  &__search {
+    padding: 0 20px;
+    margin-bottom: 30px;
+
+    span,
+    span::before {
+      border: none;
+    }
+
+    input {
+      background-color: $bg-search;
+    }
+  }
+
+  &__dialogs {
+    padding: 0 20px;
+    overflow-y: auto;
+  }
+}

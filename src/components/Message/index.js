@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Time, CheckIcon, MessageAudio } from 'components';
+import { Time, CheckIcon, MessageAudio, Avatar } from 'components';
 
 import './message.scss';
 
-const Message = ({avatar, user, text, date, audio, isMe, isReaded, isTyping, attachments}) => {
+const Message = ({user, text, date, audio, isMe, isReaded, isTyping, attachments}) => {
   return (
     <div className={classNames('message', {
       'message--isme': isMe,
@@ -15,7 +15,7 @@ const Message = ({avatar, user, text, date, audio, isMe, isReaded, isTyping, att
       'message--image': attachments && attachments.length === 1,
     })}>
       <div className="message__avatar">
-        <img src={avatar} alt={`Avatar ${user.fullname}`}/>
+        <Avatar user={user} />
       </div>
       <div className="message__content">
         <div className="message__text-info">
@@ -59,7 +59,7 @@ Message.propTypes = {
   avatar: PropTypes.string,
   user: PropTypes.object,
   text: PropTypes.string,
-  date: PropTypes.instanceOf(Date),
+  date: PropTypes.string,
   isMe: PropTypes.bool,
   isReaded: PropTypes.bool,
   isTyping: PropTypes.bool,

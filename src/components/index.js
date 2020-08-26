@@ -7,3 +7,7 @@ export { default as CheckIcon } from './CheckIcon';
 export { default as Dialogs } from './Dialogs';
 export { default as MessageAudio } from './MessageAudio';
 export { default as Avatar } from './Avatar';
+export { default as ChatInput } from './ChatInput';
+export { default as SideBar } from './SideBar';
+export { default as Chat } from './Chat';
+export { default as Messages } from './Messages';
