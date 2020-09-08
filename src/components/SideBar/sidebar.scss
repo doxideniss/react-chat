@@ -3,6 +3,9 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+
+  min-height: 0;
+
   max-width: 320px;
   width: 100%;
   border-right: 1px solid $border;
@@ -22,22 +25,9 @@
 
   }
 
-  &__search {
-    padding: 0 20px;
-    margin-bottom: 30px;
-
-    span,
-    span::before {
-      border: none;
-    }
-
-    input {
-      background-color: $bg-search;
-    }
-  }
-
   &__dialogs {
-    padding: 0 20px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 }

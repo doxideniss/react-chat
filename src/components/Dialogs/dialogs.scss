@@ -2,13 +2,36 @@
 
 .dialogs {
 
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  &__search {
+    padding: 0 20px;
+    margin-bottom: 30px;
+
+    span,
+    span::before {
+      border: none;
+    }
+
+    input {
+      background-color: $bg-search;
+    }
+  }
+
+  &__items {
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 0;
+  }
 
   &__item {
     $item: &;
     display: flex;
-    max-width: 280px;
-    margin-bottom: 20px;
+    padding: 10px 20px;
     cursor: pointer;
+
     &--online {
       #{$item}-avatar::before,
       #{$item}-avatar::after {
@@ -21,6 +44,7 @@
         background-color: #fff;
         border-radius: 50%;
       }
+
       #{$item}-avatar::after {
         bottom: 3px;
         right: 3px;
@@ -29,16 +53,19 @@
         background-color: $online;
       }
     }
+
     &--active,
     &:hover {
       background-color: $dialog-active;
     }
   }
+
   &__item-avatar {
     font-size: 0;
     margin-right: 11px;
     position: relative;
   }
+
   &__item-info {
     display: flex;
     flex-direction: column;
@@ -46,14 +73,17 @@
     font-size: 14px;
     line-height: 16px;
   }
+
   &__item-block {
     display: flex;
     justify-content: space-between;
   }
+
   &__item-name {
     font-weight: 500;
     margin-top: 4px;
   }
+
   &__item-text {
     width: 205px;
     margin-top: 5px;
@@ -62,6 +92,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   &__item-count {
     text-align: center;
     font-weight: bold;

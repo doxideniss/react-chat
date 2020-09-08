@@ -1,7 +1,7 @@
 import React from 'react';
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import {Auth, Home} from 'pages'
+import { Auth, Home } from 'pages'
 
 function App() {
   return (

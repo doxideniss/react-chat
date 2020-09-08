@@ -3,12 +3,19 @@ import classNames from 'classnames';
 
 import {Time, CheckIcon, Avatar} from 'components';
 
-const DialogItem = ({user, isMe, created_at, text, isReaded, unreaded}) => {
+const DialogItem = ({_id, user, isCurrentDialog, isMe, onSelect, created_at, text, isReaded, unreaded}) => {
+
+  const handleClick = () => {
+    onSelect(_id);
+  };
 
   return (
     <div className={classNames('dialogs__item', {
       'dialogs__item--online': user.isOnline,
-    })}>
+      'dialogs__item--active': isCurrentDialog
+    })}
+         onClick={handleClick}
+    >
       <div className="dialogs__item-avatar">
         <Avatar user={user} />
       </div>
