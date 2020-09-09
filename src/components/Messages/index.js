@@ -13,7 +13,7 @@ const Messages = ({messages}) => {
           <Message key={message._id} {...message} />
         ))
       ) : (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Сообщений нету" className="chat__empty"/>
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Сообщений нету" className="chat__center"/>
       )}
     </>
   );

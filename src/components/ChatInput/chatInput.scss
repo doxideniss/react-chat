@@ -6,6 +6,7 @@
   padding: 8px 15px;
   border: 1px solid $message-input-border;
   border-radius: 4px;
+  position: relative;
   &__icon {
     opacity: 0.5;
     span {
@@ -14,5 +15,11 @@
   }
   &__camera-btn {
     margin-right: 13px;
+  }
+  &__picker {
+    position: absolute;
+    left: 0;
+    bottom: 60px;
+    z-index: 1;
   }
 }
