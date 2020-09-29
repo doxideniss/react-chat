@@ -1,9 +1,11 @@
+import { connect } from "react-redux";
+import { withFormik } from "formik";
+
 import LoginForm from '../components/LoginForm';
-import {withFormik} from "formik";
-
 import validate from 'utils/validate';
+import { fetchLogin } from "redux/reducers/user";
 
-export default withFormik({
+const LoginFormWithFormik = withFormik({
   enableReinitialize: true,
   mapPropsToValues: () => ({
     email: '',
@@ -12,12 +14,23 @@ export default withFormik({
   validate: values => {
     const errors = {};
 
-    validate({isAuth: true, errors, values});
+    validate({ isAuth: true, errors, values });
 
     return errors;
   },
-  handleSubmit: (values, {setSubmitting}) => {
-    console.log(values);
+  handleSubmit: (values, { props: { fetchLogin }, setStatus, setSubmitting }) => {
+    fetchLogin(values)
+      .then(({ status, message }) => {
+        if (status === 'error') {
+          setStatus(message);
+        }
+        setSubmitting(false);
+      })
+      .catch(() => {
+        setSubmitting(false)
+      })
   },
   displayName: 'LoginForm'
 })(LoginForm);
+
+export default connect(null, { fetchLogin })(LoginFormWithFormik);

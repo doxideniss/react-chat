@@ -5,6 +5,9 @@ import './home.scss';
 
 const Home = () => {
 
+  React.useEffect(() => {
+
+  }, []);
 
   return (
     <section className="home">

@@ -1,5 +1,5 @@
 import * as axios from 'axios';
 
-axios.default.baseURL = 'http://localhost';
+axios.defaults.baseURL = window.location.origin;
 
 export default axios;

@@ -1,19 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Alert, Form, Input } from "antd";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import {Link} from 'react-router-dom';
-import {Button, Block} from 'components';
-import {Form, Input} from "antd";
-import {UserOutlined, LockOutlined} from '@ant-design/icons';
-
-import {validateFields} from "utils/helpers";
+import { Button, Block } from 'components';
+import { validateFields } from "utils/helpers";
 
 const LoginForm = (props) => {
   const {
     touched,
     errors,
+    status,
     handleChange,
     handleBlur,
     handleSubmit,
+    isSubmitting
   } = props;
 
   const validateField = validateFields(errors, touched);
@@ -50,8 +51,20 @@ const LoginForm = (props) => {
               prefix={<LockOutlined/>}
               placeholder="Пароль"/>
           </Form.Item>
+          {status && (
+            <Form.Item>
+              <Alert message={status} type="error"/>
+            </Form.Item>
+          )}
           <Form.Item>
-            <Button onClick={handleSubmit} type="primary" size="large">Войти</Button>
+            <Button disabled={isSubmitting}
+                    onClick={handleSubmit}
+                    type="primary"
+                    size="large"
+                    htmlType="submit"
+            >
+              Войти
+            </Button>
           </Form.Item>
           <Link className="auth__register-link" to="/signup">Зарегистрироваться</Link>
         </Form>

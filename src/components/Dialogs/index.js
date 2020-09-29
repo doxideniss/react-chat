@@ -18,13 +18,13 @@ const Dialogs = ({ userId }) => {
   const [inputValue, setInputValue] = React.useState('');
   const [filterDialogs, setFilterDialogs] = React.useState([]);
 
-  React.useEffect(() => {
-    if (!dialogs.length) {
-      dispatch(fetchDialogs());
-    } else {
-      setFilterDialogs(dialogs);
-    }
-  }, [dialogs]);
+  // React.useEffect(() => {
+  //   if (!dialogs.length) {
+  //     dispatch(fetchDialogs());
+  //   } else {
+  //     setFilterDialogs(dialogs);
+  //   }
+  // }, [dialogs]);
 
   const onSearch = (e) => {
     const value = e.target.value;

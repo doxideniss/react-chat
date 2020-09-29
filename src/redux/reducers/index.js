@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
-import auth from './auth';
-import dialogs from './dialogs';
-import messages from './messages';
+import { combineReducers } from 'redux';
 
-export default combineReducers({
-  auth,
-  dialogs,
-  messages
-})
+const reducers = ['user', 'dialogs', 'messages', 'app'];
+
+export default combineReducers(
+  reducers.reduce((initial, name) => {
+    initial[name] = require(`./${name}`).default;
+    return initial;
+  }, {})
+);

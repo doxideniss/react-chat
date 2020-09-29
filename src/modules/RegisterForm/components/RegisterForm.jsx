@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import { Alert, Form, Input } from "antd";
+import { UserOutlined, MailOutlined, LockOutlined, InfoCircleTwoTone } from '@ant-design/icons';
 
-import {Button, Block} from 'components';
-import {Alert, Form, Input} from "antd";
-import {UserOutlined, MailOutlined, LockOutlined, InfoCircleTwoTone} from '@ant-design/icons';
-import {validateFields} from "utils/helpers";
+import { Button, Block } from 'components';
+import { validateFields } from "utils/helpers";
 
 const RegisterForm = (props) => {
   const {
@@ -12,7 +13,8 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isValid,
+    isSubmitting,
+    status
   } = props;
 
   const validateField = validateFields(errors, touched);
@@ -26,8 +28,8 @@ const RegisterForm = (props) => {
         <p>Для входа в чат, вам нужно зарегистрироваться</p>
       </div>
       <Block>
-        { successReg ? (
-          <Form onSubmit={handleSubmit}>
+        {successReg ? (
+          <Form>
             <Form.Item hasFeedback
                        validateStatus={validateField('email')}
                        help={!touched.email ? null : errors.email}
@@ -46,7 +48,7 @@ const RegisterForm = (props) => {
                        help={!touched.username ? null : errors.username}
             >
               <Input
-                id="username"
+                id="fullName"
                 size="large"
                 prefix={<UserOutlined/>}
                 placeholder="Ваше Имя"
@@ -80,24 +82,26 @@ const RegisterForm = (props) => {
                 onBlur={handleBlur}
               />
             </Form.Item>
-            {
-              !isValid && (
-                <Form.Item>
-                <Alert
-                  description="Ошибка"
-                  type="error"
-                  showIcon
-                />
-                </Form.Item>
-              )
-            }
+            {status && (
+              <Form.Item>
+                <Alert message={status} type="error"/>
+              </Form.Item>
+            )}
             <Form.Item>
-              <Button onClick={handleSubmit} type="primary" size="large">Зарегистрироваться</Button>
+              <Button disabled={isSubmitting}
+                      onClick={handleSubmit}
+                      type="primary"
+                      size="large"
+                      htmlType="submit"
+              >
+                Зарегистрироваться
+              </Button>
             </Form.Item>
+            <Link className="auth__register-link" to="/signin">Войти</Link>
           </Form>
         ) : (
           <div className="auth__success-block">
-            <InfoCircleTwoTone style={{ fontSize: '40px', marginBottom: '10px'}} />
+            <InfoCircleTwoTone style={{ fontSize: '40px', marginBottom: '10px' }}/>
             <h3>Подтвердите свой аккаунт</h3>
             <p>На вашу почту отправлено письмо с ссылкой на подтверждение аккаунта.</p>
           </div>

@@ -1,15 +1,41 @@
 import React from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { Row, Spin } from "antd";
 
-import { Auth, Home } from 'pages'
+import { useDispatch, useSelector } from "react-redux";
+import { Auth, Home, NoMatchPage } from 'pages'
+import { fetchUserData } from "redux/reducers/user";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isAuth, token, appIsLoading } = useSelector(state => ({
+    isAuth: state.user.isAuth,
+    token: state.user.token,
+    appIsLoading: false //state.app.isLoading
+  }));
+
+  React.useEffect(() => {
+    if (token) {
+      // dispatch(fetchUserData());
+    }
+  }, []);
+
   return (
     <div className="wrapper">
-      <Switch>
-        <Route exact path={['/signup', '/signin']} component={Auth}/>
-        <Route exact path="/" component={Home}/>
-      </Switch>
+      {
+        appIsLoading ? (
+          <Row className="height-100" align="middle" justify="center">
+            <Spin size="large"/>
+          </Row>
+        ) : (
+          <Switch>
+            <Route exact path={['/signup', '/signin']} render={() => (isAuth ? <Redirect to="/"/> : <Auth/>)}/>
+            <Route exact path="/" render={() => (isAuth ? <Home/> : <Redirect to="/signin"/>)}/>
+            <Route component={NoMatchPage}/>
+          </Switch>
+        )
+      }
+
     </div>
   );
 }
