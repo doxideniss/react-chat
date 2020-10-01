@@ -89,19 +89,24 @@ export const fetchLogin = (postData) => dispatch => {
     .catch(({ response: { data } }) => {
       openNotification({
         title: 'Ошибка при авторизации',
-        text: 'Неверный логин или пароль',
+        text: data.message,
         type: 'error',
       });
       return data;
     })
 };
 
-export const fetchRegistration = (postData) => {
+export const fetchRegistration = (postData) => dispatch => {
   return userApi.registration(postData)
-    .then((data) => {
-      console.log(data)
+    .then(({ data: { status } }) => {
+      return status;
     })
-    .catch(e => {
-      console.log(e);
+    .catch(({ response: { data } }) => {
+      openNotification({
+        title: 'Ошибка при регистрации',
+        text: data.message,
+        type: 'error',
+      });
+      return data;
     });
 };

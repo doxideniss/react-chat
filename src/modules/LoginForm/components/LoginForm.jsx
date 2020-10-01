@@ -51,11 +51,6 @@ const LoginForm = (props) => {
               prefix={<LockOutlined/>}
               placeholder="Пароль"/>
           </Form.Item>
-          {status && (
-            <Form.Item>
-              <Alert message={status} type="error"/>
-            </Form.Item>
-          )}
           <Form.Item>
             <Button disabled={isSubmitting}
                     onClick={handleSubmit}

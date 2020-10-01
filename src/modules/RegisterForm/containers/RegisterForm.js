@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import RegisterForm from '../components/RegisterForm';
 import validate from 'utils/validate';
 import { fetchRegistration } from "redux/reducers/user";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 
 const RegistrationFormWithFormik = withFormik({
   mapPropsToValues: () => ({
@@ -19,22 +21,23 @@ const RegistrationFormWithFormik = withFormik({
 
     return errors;
   },
-  handleSubmit: (values, { props: { fetchRegistration }, setStatus, setSubmitting }) => {
+  handleSubmit: async (values, { props: { fetchRegistration, history }, setStatus, setSubmitting }) => {
     fetchRegistration(values)
-      .then(({ status, message }) => {
-        console.log(status);
-        if (status === 'error') {
-          setStatus(message);
+      .then((status) => {
+        if (status === 'success') {
+          history.push('/signup/verify')
         }
         setSubmitting(false);
       })
       .catch(() => {
-        console.log('err');
         setSubmitting(false)
       })
   },
   displayName: 'RegisterForm'
 })(RegisterForm);
 
-export default connect(null, { fetchRegistration })(RegistrationFormWithFormik)
+export default compose(
+  connect(null, { fetchRegistration }),
+  withRouter
+)(RegistrationFormWithFormik)
 

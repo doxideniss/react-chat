@@ -21,9 +21,6 @@ const LoginFormWithFormik = withFormik({
   handleSubmit: (values, { props: { fetchLogin }, setStatus, setSubmitting }) => {
     fetchLogin(values)
       .then(({ status, message }) => {
-        if (status === 'error') {
-          setStatus(message);
-        }
         setSubmitting(false);
       })
       .catch(() => {

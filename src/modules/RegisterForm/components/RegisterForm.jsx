@@ -19,8 +19,6 @@ const RegisterForm = (props) => {
 
   const validateField = validateFields(errors, touched);
 
-  const successReg = true;
-
   return (
     <>
       <div className="auth__top">
@@ -28,84 +26,71 @@ const RegisterForm = (props) => {
         <p>Для входа в чат, вам нужно зарегистрироваться</p>
       </div>
       <Block>
-        {successReg ? (
-          <Form>
-            <Form.Item hasFeedback
-                       validateStatus={validateField('email')}
-                       help={!touched.email ? null : errors.email}
+        <Form>
+          <Form.Item hasFeedback
+                     validateStatus={validateField('email')}
+                     help={!touched.email ? null : errors.email}
+          >
+            <Input
+              id="email"
+              size="large"
+              prefix={<MailOutlined/>}
+              placeholder="Введите E-Mail"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Form.Item>
+          <Form.Item hasFeedback
+                     validateStatus={validateField('username')}
+                     help={!touched.username ? null : errors.username}
+          >
+            <Input
+              id="fullName"
+              size="large"
+              prefix={<UserOutlined/>}
+              placeholder="Ваше Имя"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Form.Item>
+          <Form.Item hasFeedback
+                     validateStatus={validateField('password')}
+                     help={!touched.password ? null : errors.password}
+          >
+            <Input.Password
+              id="password"
+              size="large"
+              prefix={<LockOutlined/>}
+              placeholder="Пароль"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Form.Item>
+          <Form.Item hasFeedback
+                     validateStatus={validateField('password_2')}
+                     help={!touched.password_2 ? null : errors.password_2}
+          >
+            <Input.Password
+              id="password_2"
+              size="large"
+              prefix={<LockOutlined/>}
+              placeholder="Повторите пароль"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button disabled={isSubmitting}
+                    onClick={handleSubmit}
+                    type="primary"
+                    size="large"
+                    htmlType="submit"
             >
-              <Input
-                id="email"
-                size="large"
-                prefix={<MailOutlined/>}
-                placeholder="Введите E-Mail"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item hasFeedback
-                       validateStatus={validateField('username')}
-                       help={!touched.username ? null : errors.username}
-            >
-              <Input
-                id="fullName"
-                size="large"
-                prefix={<UserOutlined/>}
-                placeholder="Ваше Имя"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item hasFeedback
-                       validateStatus={validateField('password')}
-                       help={!touched.password ? null : errors.password}
-            >
-              <Input.Password
-                id="password"
-                size="large"
-                prefix={<LockOutlined/>}
-                placeholder="Пароль"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            <Form.Item hasFeedback
-                       validateStatus={validateField('password_2')}
-                       help={!touched.password_2 ? null : errors.password_2}
-            >
-              <Input.Password
-                id="password_2"
-                size="large"
-                prefix={<LockOutlined/>}
-                placeholder="Повторите пароль"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Item>
-            {status && (
-              <Form.Item>
-                <Alert message={status} type="error"/>
-              </Form.Item>
-            )}
-            <Form.Item>
-              <Button disabled={isSubmitting}
-                      onClick={handleSubmit}
-                      type="primary"
-                      size="large"
-                      htmlType="submit"
-              >
-                Зарегистрироваться
-              </Button>
-            </Form.Item>
-            <Link className="auth__register-link" to="/signin">Войти</Link>
-          </Form>
-        ) : (
-          <div className="auth__success-block">
-            <InfoCircleTwoTone style={{ fontSize: '40px', marginBottom: '10px' }}/>
-            <h3>Подтвердите свой аккаунт</h3>
-            <p>На вашу почту отправлено письмо с ссылкой на подтверждение аккаунта.</p>
-          </div>
-        )}
+              Зарегистрироваться
+            </Button>
+          </Form.Item>
+          <Link className="auth__register-link" to="/signin">Войти</Link>
+        </Form>
       </Block>
     </>
   );

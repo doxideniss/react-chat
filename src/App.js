@@ -29,7 +29,7 @@ function App() {
           </Row>
         ) : (
           <Switch>
-            <Route exact path={['/signup', '/signin']} render={() => (isAuth ? <Redirect to="/"/> : <Auth/>)}/>
+            <Route exact path={['/signup', '/signin', '/signup/verify']} render={() => (isAuth ? <Redirect to="/"/> : <Auth/>)}/>
             <Route exact path="/" render={() => (isAuth ? <Home/> : <Redirect to="/signin"/>)}/>
             <Route component={NoMatchPage}/>
           </Switch>
