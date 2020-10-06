@@ -8,10 +8,11 @@ import { fetchDialogs, setCurrentDialog } from "redux/reducers/dialogs";
 
 import './dialogs.scss';
 
-const Dialogs = ({ userId }) => {
+const Dialogs = () => {
   const dispatch = useDispatch();
-  const { dialogs, currentDialogId, isLoading } = useSelector(state => ({
+  const { userId, dialogs, currentDialogId, isLoading } = useSelector(state => ({
     dialogs: state.dialogs.items,
+    userId: state.user._id,
     currentDialogId: state.dialogs.currentDialogId,
     isLoading: state.dialogs.isLoading,
   }));
@@ -28,7 +29,9 @@ const Dialogs = ({ userId }) => {
 
   const onSearch = (e) => {
     const value = e.target.value;
-    setFilterDialogs(dialogs.filter(dialog => dialog.user.name.toUpperCase().indexOf(value.toUpperCase()) >= 0));
+    setFilterDialogs(
+      dialogs.filter(dialog => dialog.lastMessage.user.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0),
+    );
     setInputValue(e.target.value);
   };
 
@@ -51,9 +54,9 @@ const Dialogs = ({ userId }) => {
             <Spin tip="Загрузка контактов..."/>
           ) : (
             filterDialogs && filterDialogs.length ? (
-              orderBy(filterDialogs, (item) => (new Date(item.created_at)), ["desc"]).map(dialog => (
+              orderBy(filterDialogs, (item) => (new Date(item.lastMessage.created_at)), ["desc"]).map(dialog => (
                 <DialogItem key={dialog._id}
-                            isMe={dialog.user._id === userId}
+                            isMe={dialog.lastMessage.user._id === userId}
                             isCurrentDialog={currentDialogId === dialog._id}
                             onSelect={onSelectDialog}
                             {...dialog}

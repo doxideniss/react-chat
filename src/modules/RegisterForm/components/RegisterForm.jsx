@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Alert, Form, Input } from "antd";
-import { UserOutlined, MailOutlined, LockOutlined, InfoCircleTwoTone } from '@ant-design/icons';
+import { Form, Input } from "antd";
+import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 
 import { Button, Block } from 'components';
 import { validateFields } from "utils/helpers";
@@ -13,8 +13,7 @@ const RegisterForm = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    isSubmitting,
-    status
+    isSubmitting
   } = props;
 
   const validateField = validateFields(errors, touched);

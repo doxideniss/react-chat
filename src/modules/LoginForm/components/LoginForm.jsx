@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { Button, Block } from 'components';
@@ -10,7 +10,6 @@ const LoginForm = (props) => {
   const {
     touched,
     errors,
-    status,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -28,35 +27,35 @@ const LoginForm = (props) => {
       <Block>
         <Form>
           <Form.Item hasFeedback
-                     validateStatus={validateField('email')}
-                     help={!touched.email ? null : errors.email}
+            validateStatus={validateField('email')}
+            help={!touched.email ? null : errors.email}
           >
             <Input
               id="email"
               onBlur={handleBlur}
               onChange={handleChange}
               size="large"
-              prefix={<UserOutlined/>}
-              placeholder="E-Mail"/>
+              prefix={<UserOutlined />}
+              placeholder="E-Mail" />
           </Form.Item>
           <Form.Item hasFeedback
-                     validateStatus={validateField('password')}
-                     help={!touched.password ? null : errors.password}
+            validateStatus={validateField('password')}
+            help={!touched.password ? null : errors.password}
           >
             <Input.Password
               id="password"
               onBlur={handleBlur}
               onChange={handleChange}
               size="large"
-              prefix={<LockOutlined/>}
-              placeholder="Пароль"/>
+              prefix={<LockOutlined />}
+              placeholder="Пароль" />
           </Form.Item>
           <Form.Item>
             <Button disabled={isSubmitting}
-                    onClick={handleSubmit}
-                    type="primary"
-                    size="large"
-                    htmlType="submit"
+              onClick={handleSubmit}
+              type="primary"
+              size="large"
+              htmlType="submit"
             >
               Войти
             </Button>

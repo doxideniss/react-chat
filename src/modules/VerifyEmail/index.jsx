@@ -25,24 +25,28 @@ const renderTextInfo = ({ hash, status, message }) => {
 const CheckEmailInfo = () => {
   const location = useLocation();
   const history = useHistory();
-  const hash = location.search.split('hash=')[1];
-  const [checking, setChecking] = React.useState(!!hash);
-  const [info, setInfo] = React.useState(renderTextInfo({ hash, status: null, message: null }));
+  const hash = React.useRef(location.search.split('hash=')[1]);
+  const [checking, setChecking] = React.useState(!!hash.current);
+  const [info, setInfo] = React.useState(renderTextInfo({ hash: hash.current, status: null, message: null }));
 
   React.useEffect(() => {
-    if (hash) {
+    if (hash.current) {
       userApi
-        .verify(hash)
+        .verify(hash.current)
         .then(({ data: { status, message } }) => {
-          setInfo(renderTextInfo({ hash, status, message }));
+          setInfo(renderTextInfo({ hash: hash.current, status, message }));
           setChecking(false);
         })
         .catch(({ response: { data: { status, message } } }) => {
-          setInfo(renderTextInfo({ hash, status, message }));
+          setInfo(renderTextInfo({ hash: hash.current, status, message }));
           setChecking(false);
         });
     }
   }, []);
+
+  const handleClick = () => {
+    history.push('/signin')
+  }
 
   return (
     <>
@@ -54,17 +58,17 @@ const CheckEmailInfo = () => {
             subTitle={info.message}
             extra={
               info.status === 'success' && (
-                <Button type="primary" onClick={() => history.push('/signin')}>
+                <Button type="primary" onClick={handleClick}>
                   Войти
                 </Button>
               )
             }
           />
         ) : (
-          <>
-            <Spin size="large"/>
-          </>
-        )}
+            <>
+              <Spin size="large" />
+            </>
+          )}
       </Block>
     </>
   );

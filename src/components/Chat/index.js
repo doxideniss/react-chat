@@ -22,6 +22,7 @@ const Chat = () => {
       dispatch(fetchMessages(currentDialogId));
     }
   }, [currentDialogId]);
+
   React.useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView();

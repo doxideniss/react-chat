@@ -16,7 +16,7 @@ const SideBar = () => {
         <Button type="text" icon={<FormOutlined/>}/>
       </div>
       <div className="sidebar__dialogs">
-        <Dialogs userId={'3'}/>
+        <Dialogs/>
       </div>
     </div>
   );
