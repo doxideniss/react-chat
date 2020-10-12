@@ -4,12 +4,12 @@ import { Empty } from "antd";
 
 import { Message } from 'components';
 
-const Messages = ({messages}) => {
+const Messages = ({ messages }) => {
 
   return (
     <>
       {messages && messages.length ? (
-        orderBy(messages, (item) => (new Date(item.date)), ["asc"]).map(message => (
+        orderBy(messages, (item) => (new Date(item.createdAt)), ["asc"]).map(message => (
           <Message key={message._id} {...message} />
         ))
       ) : (

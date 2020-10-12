@@ -11,7 +11,7 @@ function App() {
   const { isAuth, token, appIsLoading } = useSelector(state => ({
     isAuth: state.user.isAuth,
     token: state.user.token,
-    appIsLoading: false //state.app.isLoading
+    appIsLoading: false//state.app.isLoading
   }));
 
   React.useEffect(() => {
@@ -30,7 +30,7 @@ function App() {
         ) : (
           <Switch>
             <Route exact path={['/signup', '/signin', '/signup/verify']} render={() => (isAuth ? <Redirect to="/"/> : <Auth/>)}/>
-            <Route exact path="/" render={() => (isAuth ? <Home/> : <Redirect to="/signin"/>)}/>
+            <Route exact path={["/", "/dialog/:id"]} render={() => (isAuth ? <Home/> : <Redirect to="/signin"/>)}/>
             <Route component={NoMatchPage}/>
           </Switch>
         )

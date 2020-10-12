@@ -18,14 +18,8 @@ const LoginFormWithFormik = withFormik({
 
     return errors;
   },
-  handleSubmit: (values, { props: { fetchLogin }, setStatus, setSubmitting }) => {
-    fetchLogin(values)
-      .then(({ status, message }) => {
-        setSubmitting(false);
-      })
-      .catch(() => {
-        setSubmitting(false)
-      })
+  handleSubmit: async (values, { props: { fetchLogin } }) => {
+    await fetchLogin(values);
   },
   displayName: 'LoginForm'
 })(LoginForm);

@@ -6,7 +6,8 @@ import { Time, CheckIcon, MessageAudio, Avatar } from 'components';
 
 import './message.scss';
 
-const Message = ({user, text, date, audio, isMe, isReaded, isTyping, attachments}) => {
+const Message = ({user, text, createdAt, audio, isMe, isReaded, isTyping, attachments}) => {
+  console.log(isMe);
   return (
     <div className={classNames('message', {
       'message--isme': isMe,
@@ -48,7 +49,7 @@ const Message = ({user, text, date, audio, isMe, isReaded, isTyping, attachments
           }
           <CheckIcon className="message__icon" isMe={isMe} isReaded={isReaded}/>
         </div>
-        <Time date={date}/>
+        <Time date={createdAt}/>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const SET_IS_AUTH = 'USER:SET_IS_AUTH';
 const SET_TOKEN = 'USER:SET_TOKEN';
 
 const initialState = {
-  user: null,
+  data: null,
   token: window.localStorage.token,
   isAuth: false
 };
@@ -18,7 +18,7 @@ export default function reducer(state = initialState, { type, payload }) {
     case SET_USER_DATA:
       return {
         ...state,
-        user: payload,
+        data: payload,
         isAuth: true
       };
     case SET_IS_AUTH:

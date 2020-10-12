@@ -21,7 +21,7 @@ const RegistrationFormWithFormik = withFormik({
 
     return errors;
   },
-  handleSubmit: async (values, { props: { fetchRegistration, history }, setStatus, setSubmitting }) => {
+  handleSubmit: (values, { props: { fetchRegistration, history }, setSubmitting }) => {
     fetchRegistration(values)
       .then((status) => {
         if (status === 'success') {

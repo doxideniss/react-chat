@@ -1,27 +1,19 @@
 import React from 'react';
-import { Button, Empty, Spin } from "antd";
-import { EllipsisOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from "react-redux";
+import { Empty, Spin } from "antd";
+import { useSelector } from "react-redux";
 
-import { Messages, ChatInput } from 'components';
-import { fetchMessages } from "redux/reducers/messages";
+import { Messages, ChatInput, Status } from 'components';
 
 import './chat.scss';
 
 const Chat = () => {
-  const dispatch = useDispatch();
-  const { messages, currentDialogId, isLoading } = useSelector(state => ({
+  const { dialogUser, messages, currentDialog, isLoading } = useSelector(state => ({
     messages: state.messages.items,
-    currentDialogId: state.dialogs.currentDialogId,
+    currentDialog: state.dialogs.currentDialog,
+    dialogUser: state.dialogs.currentDialog ? (state.user.data._id === state.dialogs.currentDialog.author._id) ? state.dialogs.currentDialog.partner : state.dialogs.currentDialog.author : null,
     isLoading: state.messages.isLoading
   }));
   const messageEndRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (currentDialogId !== null) {
-      dispatch(fetchMessages(currentDialogId));
-    }
-  }, [currentDialogId]);
 
   React.useEffect(() => {
     if (messageEndRef.current) {
@@ -32,20 +24,9 @@ const Chat = () => {
   return (
     <div className="chat">
       {
-        currentDialogId ? (
+        currentDialog ? (
           <>
-            <div className="chat__header">
-              <div></div>
-              <div className="chat__header-box">
-                <div className="chat__name">Test</div>
-                <div className="chat__online"><span>онлайн</span></div>
-              </div>
-              <div className="chat__options">
-                <Button type="text" icon={
-                  <EllipsisOutlined style={{ fontSize: '20px' }}/>
-                }/>
-              </div>
-            </div>
+            <Status fullName={dialogUser.fullName} online={dialogUser.isOnline}/>
             <div className="chat__messages">
               {isLoading ? (
                 <Spin tip="Загрузка сообщений..." className="chat__center"/>

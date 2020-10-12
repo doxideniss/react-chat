@@ -2,7 +2,8 @@ import { dialogsApi } from "utils/api";
 
 const initialState = {
   items: [],
-  currentDialogId: null
+  currentDialog: null,
+  isLoading: false,
 };
 
 const SET_ITEMS = 'DIALOGS:SET_ITEMS';
@@ -20,7 +21,7 @@ export default (state = initialState, action) => {
     case SET_CURRENT_DIALOG:
       return {
         ...state,
-        currentDialogId: action.payload,
+        currentDialog: state.items.find(dialog => dialog._id === action.payload)
       };
     case SET_IS_LOADING:
       return {
@@ -32,25 +33,27 @@ export default (state = initialState, action) => {
   }
 };
 
-export const setItems = (items) => ({
+export const setItems = items => ({
   type: SET_ITEMS,
   payload: items
 });
 
-export const setIsLoading = (bool) => ({
+export const setIsLoading = bool => ({
   type: SET_IS_LOADING,
   payload: bool
 });
 
-export const setCurrentDialog = (id) => ({
+export const setCurrentDialog = id => ({
   type: SET_CURRENT_DIALOG,
   payload: id
 });
 
-export const fetchDialogs = () => async (dispatch) => {
+export const fetchDialogs = id => dispatch => {
   dispatch(setIsLoading(true));
-  await dialogsApi.getAll()
-    .then(({ data }) => dispatch(setItems(data)))
+  dialogsApi.getAll()
+    .then(({ data }) => {
+      dispatch(setItems(data))
+    })
     .catch(() => {
       dispatch(setIsLoading(false));
     });

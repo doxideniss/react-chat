@@ -34,6 +34,7 @@
     display: flex;
     padding: 10px 20px;
     cursor: pointer;
+    color: $black;
 
     &--online {
       #{$item}-avatar::before,
@@ -88,7 +89,6 @@
 
   &__item-name {
     font-weight: 500;
-    margin-top: 4px;
   }
 
   &__item-text {
